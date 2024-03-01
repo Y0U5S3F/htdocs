@@ -17,16 +17,16 @@ switch ($var) {
 
 function unProduit($id) {
     global $connexion;
-    if(property_exists($id){
-        $requeste = "SELECT * FROM product WHERE id=:x";//requete
-        $stmt->bindPaint(":x", $id);//liaison des donnes avec la requete
-        $stmt = $connexion->prepare($requeste);
-        $stmt->execute();
-        $resultat = $stmt->fetch(PDO::FETCH_ASSOC);
-        echo json_encode($resultat);
-    })
-    else
-    echo "id non existant";
+    $requeste = "SELECT * FROM product WHERE id=:x";//requete
+    $stmt = $connexion->prepare($requeste);
+    $stmt->bindPaint(":x", $id);//liaison des donnes avec la requete
+    $stmt->execute();
+    $resultat = $stmt->fetch(PDO::FETCH_ASSOC);
+    echo json_encode($resultat);
+    if($resultat==null){
+        $msg = ["erreur"=>"produit inexistant"];
+        echo json_encode($msg);
+    }
 }
 
 function tousProduit(){
